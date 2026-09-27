@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hotel Kashi Pride | Share Your Experience</title>
+
+<meta name="theme-color" content="#11100e">
+
+<style>
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            #5b4022 0%,
+            #241a10 28%,
+            #100d09 60%,
+            #070605 100%
+        );
+
+    color:#fff;
+
+    display:flex;
+    justify-content:center;
+
+    padding:18px;
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container{
+    width:100%;
+    max-width:470px;
+    padding:15px 0 40px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    text-align:center;
+    padding:25px 15px 20px;
+}
+
+
+.logo{
+    width:82px;
+    height:82px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    border:2px solid #d8b16a;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#d8b16a;
+
+    font-size:26px;
+    font-weight:800;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(216,177,106,.12),
+            rgba(0,0,0,.1)
+        );
+
+    box-shadow:
+        0 0 35px rgba(216,177,106,.18),
+        inset 0 0 20px rgba(216,177,106,.05);
+}
+
+
+.badge{
+    display:inline-block;
+
+    margin-top:18px;
+
+    padding:7px 14px;
+
+    border:1px solid rgba(216,177,106,.35);
+
+    border-radius:50px;
+
+    color:#d8b16a;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+
+h1{
+    margin-top:14px;
+
+    font-size:29px;
+
+    font-weight:700;
+
+    letter-spacing:-.4px;
+}
+
+
+.subtitle{
+    margin-top:8px;
+
+    color:#999;
+
+    font-size:14px;
+}
+
+
+.stars{
+    margin-top:20px;
+
+    color:#f5c85d;
+
+    font-size:34px;
+
+    letter-spacing:4px;
+
+    text-shadow:
+        0 0 15px rgba(245,200,93,.18);
+}
+
+
+/* =========================
+   QUESTION
+========================= */
+
+.question{
+    text-align:center;
+
+    margin-top:15px;
+
+    font-size:20px;
+
+    font-weight:600;
+}
+
+
+.help{
+    text-align:center;
+
+    margin-top:7px;
+    margin-bottom:20px;
+
+    color:#858585;
+
+    font-size:12px;
+}
+
+
+/* =========================
+   SUGGESTIONS
+========================= */
+
+.suggestions{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:11px;
+}
+
+
+.suggestion{
+    position:relative;
+
+    width:100%;
+
+    padding:
+        17px
+        48px
+        17px
+        17px;
+
+    border-radius:17px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid rgba(255,255,255,.09);
+
+    color:#ddd;
+
+    font-size:14px;
+
+    line-height:1.55;
+
+    cursor:pointer;
+
+    transition:
+        .2s ease;
+
+    user-select:none;
+}
+
+
+.suggestion:hover{
+    border-color:
+        rgba(216,177,106,.55);
+
+    transform:
+        translateY(-1px);
+}
+
+
+.suggestion.selected{
+    background:
+        rgba(216,177,106,.10);
+
+    border:
+        1.5px solid #d8b16a;
+
+    box-shadow:
+        0 0 25px rgba(216,177,106,.08);
+}
+
+
+.check{
+    position:absolute;
+
+    right:15px;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    width:24px;
+    height:24px;
+
+    border-radius:50%;
+
+    border:
+        1px solid #555;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:transparent;
+
+    font-size:14px;
+}
+
+
+.suggestion.selected .check{
+    background:#d8b16a;
+
+    border-color:#d8b16a;
+
+    color:#111;
+}
+
+
+/* =========================
+   SELECTED REVIEW
+========================= */
+
+.selected-box{
+    display:none;
+
+    margin-top:18px;
+
+    padding:16px;
+
+    border-radius:16px;
+
+    background:#17130e;
+
+    border:
+        1px solid rgba(216,177,106,.25);
+}
+
+
+.selected-box.show{
+    display:block;
+}
+
+
+.selected-label{
+    color:#d8b16a;
+
+    font-size:10px;
+
+    letter-spacing:1.5px;
+
+    text-transform:uppercase;
+
+    margin-bottom:8px;
+}
+
+
+.selected-text{
+    color:#ddd;
+
+    font-size:13px;
+
+    line-height:1.55;
+}
+
+
+/* =========================
+   MAIN BUTTON
+========================= */
+
+.main-btn{
+    width:100%;
+
+    border:0;
+
+    margin-top:18px;
+
+    padding:18px;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #eeeeee
+        );
+
+    color:#111;
+
+    font-size:15px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.25);
+}
+
+
+.main-btn:hover:not(:disabled){
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.35);
+}
+
+
+.main-btn:active:not(:disabled){
+    transform:
+        scale(.98);
+}
+
+
+.main-btn:disabled{
+    opacity:.35;
+
+    cursor:not-allowed;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+    display:none;
+
+    text-align:center;
+
+    margin-top:13px;
+
+    color:#8ee29d;
+
+    font-size:12px;
+
+    line-height:1.5;
+}
+
+
+/* =========================
+   HOW IT WORKS
+========================= */
+
+.steps{
+    margin-top:25px;
+
+    padding:18px;
+
+    border-radius:17px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid rgba(255,255,255,.07);
+}
+
+
+.steps-title{
+    color:#d8b16a;
+
+    font-size:10px;
+
+    letter-spacing:1.5px;
+
+    text-transform:uppercase;
+
+    margin-bottom:13px;
+}
+
+
+.step{
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    margin:10px 0;
+
+    color:#999;
+
+    font-size:12px;
+}
+
+
+.number{
+    width:24px;
+    height:24px;
+
+    border-radius:50%;
+
+    background:#292117;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:#d8b16a;
+
+    font-weight:700;
+
+    flex-shrink:0;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    text-align:center;
+
+    margin-top:25px;
+
+    color:#505050;
+
+    font-size:9px;
+
+    letter-spacing:.5px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:380px){
+
+    body{
+        padding:12px;
+    }
+
+    h1{
+        font-size:25px;
+    }
+
+    .stars{
+        font-size:29px;
+    }
+
+    .suggestion{
+        font-size:13px;
+    }
+
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- =====================
+         HEADER
+    ====================== -->
+
+    <div class="header">
+
+        <div class="logo">
+            KP
+        </div>
+
+
+        <div class="badge">
+            Guest Experience
+        </div>
+
+
+        <h1>
+            Hotel Kashi Pride
+        </h1>
+
+
+        <div class="subtitle">
+            Thank you for staying with us ❤️
+        </div>
+
+
+        <div class="stars">
+            ★★★★★
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================
+         QUESTION
+    ====================== -->
+
+    <div class="question">
+        How was your stay?
+    </div>
+
+
+    <div class="help">
+        Select the review that best describes your experience.
+    </div>
+
+
+
+    <!-- =====================
+         REVIEW OPTIONS
+    ====================== -->
+
+    <div class="suggestions">
+
+
+        <div
+            class="suggestion"
+            onclick="selectReview(this)"
+        >
+
+            The room was clean and comfortable. The staff was polite and helpful. We had a pleasant stay at Hotel Kashi Pride.
+
+            <span class="check">
+                ✓
+            </span>
+
+        </div>
+
+
+
+        <div
+            class="suggestion"
+            onclick="selectReview(this)"
+        >
+
+            Had a comfortable stay at Hotel Kashi Pride. The room was clean, the service was good and the staff was friendly.
+
+            <span class="check">
+                ✓
+            </span>
+
+        </div>
+
+
+
+        <div
+            class="suggestion"
+            onclick="selectReview(this)"
+        >
+
+            Overall a pleasant experience. Clean rooms, helpful staff and good service. Would recommend Hotel Kashi Pride.
+
+            <span class="check">
+                ✓
+            </span>
+
+        </div>
+
+
+
+        <div
+            class="suggestion"
+            onclick="selectReview(this)"
+        >
+
+            We enjoyed our stay at Hotel Kashi Pride. Everything was comfortable and the staff was very courteous.
+
+            <span class="check">
+                ✓
+            </span>
+
+        </div>
+
+
+
+        <div
+            class="suggestion"
+            onclick="selectReview(this)"
+        >
+
+            Nice stay and good service. The room was comfortable and the staff was helpful throughout our visit.
+
+            <span class="check">
+                ✓
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================
+         SELECTED REVIEW
+    ====================== -->
+
+    <div
+        id="selectedBox"
+        class="selected-box"
+    >
+
+        <div class="selected-label">
+            Selected review
+        </div>
+
+
+        <div
+            id="selectedText"
+            class="selected-text"
+        ></div>
+
+    </div>
+
+
+
+    <!-- =====================
+         GOOGLE BUTTON
+    ====================== -->
+
+    <button
+        id="reviewButton"
+        class="main-btn"
+        disabled
+        onclick="copyAndOpenGoogle()"
+    >
+
+        ⭐ Copy Review & Continue to Google
+
+    </button>
+
+
+
+    <!-- =====================
+         STATUS
+    ====================== -->
+
+    <div
+        id="status"
+        class="status"
+    >
+
+        ✓ Review copied successfully.<br>
+        Opening Google Reviews...
+
+    </div>
+
+
+
+    <!-- =====================
+         STEPS
+    ====================== -->
+
+    <div class="steps">
+
+        <div class="steps-title">
+            Almost done
+        </div>
+
+
+        <div class="step">
+
+            <div class="number">
+                1
+            </div>
+
+            Select your review
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="number">
+                2
+            </div>
+
+            Continue to Google
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="number">
+                3
+            </div>
+
+            Select your rating & paste
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="number">
+                4
+            </div>
+
+            Tap Post
+
+        </div>
+
+    </div>
+
+
+
+    <div class="footer">
+
+        HOTEL KASHI PRIDE • YOUR EXPERIENCE MATTERS
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+/*
+====================================================
+HOTEL KASHI PRIDE
+GOOGLE BUSINESS PROFILE PLACE ID
+====================================================
+*/
+
+const PLACE_ID =
+"ChIJw-JsRtUvjjkRw8jNBxZnkg8";
+
+
+/*
+====================================================
+DIRECT GOOGLE REVIEW URL
+====================================================
+*/
+
+const GOOGLE_REVIEW_URL =
+"https://search.google.com/local/writereview?placeid="
++ encodeURIComponent(PLACE_ID);
+
+
+
+/*
+====================================================
+SELECTED REVIEW
+====================================================
+*/
+
+let selectedReview = "";
+
+
+
+/*
+====================================================
+SELECT REVIEW FUNCTION
+====================================================
+*/
+
+function selectReview(element){
+
+    /*
+    Remove previous selection
+    */
+
+    document
+        .querySelectorAll(".suggestion")
+        .forEach(function(item){
+
+            item.classList.remove("selected");
+
+        });
+
+
+
+    /*
+    Add selection
+    */
+
+    element.classList.add("selected");
+
+
+
+    /*
+    Get review text
+    */
+
+    selectedReview =
+        element.innerText
+            .replace("✓","")
+            .trim();
+
+
+
+    /*
+    Show selected review
+    */
+
+    document
+        .getElementById("selectedText")
+        .innerText =
+        selectedReview;
+
+
+
+    document
+        .getElementById("selectedBox")
+        .classList.add("show");
+
+
+
+    /*
+    Enable Google button
+    */
+
+    document
+        .getElementById("reviewButton")
+        .disabled = false;
+
+}
+
+
+
+/*
+====================================================
+COPY + OPEN GOOGLE
+====================================================
+*/
+
+async function copyAndOpenGoogle(){
+
+    /*
+    No selection
+    */
+
+    if(!selectedReview){
+
+        return;
+
+    }
+
+
+
+    const status =
+        document.getElementById("status");
+
+
+
+    try{
+
+        /*
+        Copy selected review
+        */
+
+        await navigator.clipboard.writeText(
+            selectedReview
+        );
+
+
+
+        /*
+        Show success
+        */
+
+        status.style.display =
+            "block";
+
+
+
+        /*
+        Open direct Google review page
+        */
+
+        setTimeout(function(){
+
+            window.location.href =
+                GOOGLE_REVIEW_URL;
+
+        },500);
+
+
+    }catch(error){
+
+        /*
+        Clipboard fallback
+        */
+
+        const textarea =
+            document.createElement("textarea");
+
+
+        textarea.value =
+            selectedReview;
+
+
+        textarea.style.position =
+            "fixed";
+
+        textarea.style.left =
+            "-9999px";
+
+
+        document
+            .body
+            .appendChild(textarea);
+
+
+        textarea.focus();
+
+        textarea.select();
+
+
+        try{
+
+            document.execCommand("copy");
+
+        }catch(e){
+
+            alert(
+                "Please copy the selected review manually."
+            );
+
+        }
+
+
+        textarea.remove();
+
+
+
+        /*
+        Open Google anyway
+        */
+
+        window.location.href =
+            GOOGLE_REVIEW_URL;
+
+    }
+
+}
+
+</script>
+
+
+</body>
+</html>
